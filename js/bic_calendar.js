@@ -216,6 +216,20 @@ $.fn.bic_calendar = function(options) {
             showMonthDays(month, year);
             checkEvents(month, year);
             markSelectedDays();
+            changeDateEventListener(month, year);
+        }
+        
+        /**
+        * Custom event listener to handle changes on 
+        * "next" or "previous" year or month
+        */
+        function changeDateEventListener(month, year){
+            var eventBicCalendarChangeDate = new CustomEvent("bicCalendarChangeDate", {
+                detail: {
+                    date: new Date(year, month, 1)
+                }
+            });
+            document.dispatchEvent(eventBicCalendarChangeDate);
         }
 
         /**
